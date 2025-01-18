@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
         */
 
-        //$this->call( SalarioSeeder::class);
+        $this->call( SalarioSeeder::class);
         $this->call( CategoriaSeeder::class);
     }
 }
