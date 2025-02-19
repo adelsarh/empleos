@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('vacantes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->dropForeign(['categoria_id']);
         });
     }
 
