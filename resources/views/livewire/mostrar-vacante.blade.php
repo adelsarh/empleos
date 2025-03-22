@@ -34,7 +34,7 @@
     <div class="md:grid md:grid-cols-6 gap-4"> 
         <div class="md:col-span-2">
             <img class="rounded-xl" 
-            src='{{ asset('storage/public/vacantes/' . $vacante->imagen)}}' alt="vacante">
+            src='{{ asset('storage/vacantes/' . $vacante->imagen)}}' alt="vacante">
 
         </div>
 
@@ -56,6 +56,6 @@
     @endguest
 
     @cannot('create', App\Models\Vacante::class)
-         <livewire:postular-vacante />   
+         <livewire:postular-vacante :vacante="$vacante" />   
     @endcannot
 </div>
