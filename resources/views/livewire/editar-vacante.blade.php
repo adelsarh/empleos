@@ -7,7 +7,7 @@
 
 @endpush
 
-<form action="" class="md:w-1/2 space-y-5" wire:submit.prevent='crearVacante' novalidate>
+<form action="" class="md:w-1/2 space-y-5" wire:submit.prevent='editarVacante' novalidate>
 
     <div>
         <x-input-label for="titulo" :value="__('Titulo Vacante')"/>
@@ -27,13 +27,16 @@
         <x-input-label for="salario" :value="__('Salario mensual')"/>
         <select
             id="salario"
-            wire:model.live="salario"
+            wire:model="salario"
             class="rounded-md shadow-sm border-gray-300 focus:ring-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1 w-full"
         >
-            <option value="">-- Salario --</option>
+            <option value=''>-- Salario --</option>
 
             @foreach($salarios as $salario)
-                <option value=" {{$salario->id }}">{{ $salario->salario }}</option>
+
+                <option
+                    value="{{ $salario->id }}">{{ $salario->salario }}
+                </option>
             @endforeach
 
         </select>
@@ -44,13 +47,13 @@
         <x-input-label for="categoria" :value="__('Categoria')"/>
         <select
             id="categoria"
-            wire:model.live="categoria"
+            wire:model="categoria"
             class="rounded-md shadow-sm border-gray-300 focus:ring-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1 w-full"
         >
             <option value="">-- Categoría --</option>
 
             @foreach($categorias as $categoria)
-                <option value=" {{$categoria->id }}">{{ $categoria->categoria }}</option>
+                <option value="{{$categoria->id }}">{{ $categoria->categoria }}</option>
             @endforeach
         </select>
         <x-input-error :messages="$errors->get('categoria')" class="mt-2"/>
@@ -102,7 +105,7 @@
         <x-text-input id="imagen"
                       class="block mt-1 w-full"
                       type="file"
-                      wire:model.live="imagen"
+                      wire:model.live="imagen_nueva"
                       required
                       autofocus
                       accept="image/*"
@@ -113,21 +116,23 @@
             800x400px).</p>
 
         <div class="my-5 w-80">
-            @if($imagen)
+            <x-input-label for="imagen" :value="__('Imagen actual')"/>
+            <img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="Imagen vacante" srcset="">
+        </div>
 
-                <span class="font-semibold text-lg">Previsualización de la imagen </span>
-
-                <img class="rounded-xl mt-5" src="{{ $imagen->temporaryUrl() }}" alt="">
-
+        <div class='my-5 w-80'>
+            @if($imagen_nueva)
+            Imagen nueva: 
+            <img src='{{ $imagen_nueva->temporaryUrl()}}'
             @endif
         </div>
 
 
-        <x-input-error :messages="$errors->get('imagen')" class="mt-2"/>
+        <x-input-error :messages="$errors->get('imagen_nueva')" class="mt-2"/>
     </div>
 
     <x-primary-button>
-        Crear Vacante
+        Guardar cambios
     </x-primary-button>
 
 </form>
