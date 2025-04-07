@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes\Components;
 
 use Livewire\Component;
 
@@ -9,6 +9,6 @@ class MostrarVacante extends Component
     public $vacante;
     public function render()
     {
-        return view('livewire.mostrar-vacante');
+        return view('livewire.vacantes.components.mostrar-vacante');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Categoria;
 use App\Models\Salario;
@@ -50,7 +50,7 @@ class EditarVacante extends Component
 
     public function editarVacante(){
         $formData = $this->validate();
-    
+
         if($this->imagen_nueva){
             //almacenar la imagen
             $imagen = $this->imagen_nueva->store(path: 'vacantes');
@@ -61,7 +61,7 @@ class EditarVacante extends Component
             'titulo' => $formData['titulo'],
             'salario_id' => $formData['salario'],
             'categoria_id' => $formData['categoria'],
-            'imagen' => $formData['imagen'] ?? $this->imagen, 
+            'imagen' => $formData['imagen'] ?? $this->imagen,
             'empresa' => $formData['empresa'],
             'ultimo_dia' => $formData['ultimo_dia'],
             'descripcion' => $formData['descripcion'],
@@ -77,7 +77,7 @@ class EditarVacante extends Component
         $salarios = Salario::select('id','salario')->get();
         $categorias = Categoria::select('id', 'categoria')->get();
 
-        return view('livewire.editar-vacante',
+        return view('livewire.vacantes.components.editar-vacante',
         [
             'salarios' => $salarios,
             'categorias' => $categorias

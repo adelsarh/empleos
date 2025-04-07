@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes;
 
 use App\Models\Vacante;
 use Livewire\Component;
-use Livewire\Attributes\On; 
 
 
 class HomeVacantes extends Component
 {
-
     public $termino;
     public $salario;
     public $categoria;
@@ -19,17 +17,15 @@ class HomeVacantes extends Component
     public function busqueda($termino, $salario, $categoria)
     {
         $this->termino = $termino;
-        $this->salario = $salario; 
+        $this->salario = $salario;
         $this->categoria = $categoria;
-        
+
     }
 
     public function render()
     {
-
        // $vacantes = Vacante::all();
-
-       $vacantes = Vacante::when($this->termino, function($query){
+        $vacantes = Vacante::when($this->termino, function($query){
             $query->where('titulo', 'LIKE', '%'.$this->termino.'%');
        })
        ->when($this->salario, function($query){
@@ -39,7 +35,7 @@ class HomeVacantes extends Component
             $query->where('categoria_id', $this->categoria);
        })->get();
 
-        return view('livewire.home-vacantes', 
+        return view('livewire.vacantes.home-vacantes',
             [
                 "vacantes" => $vacantes
             ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Categoria;
 use App\Models\Salario;
@@ -10,7 +10,7 @@ class FiltrarVacantes extends Component
 {
 
     public $termino;
-    public $salario; 
+    public $salario;
     public $categoria;
 
 
@@ -24,7 +24,7 @@ class FiltrarVacantes extends Component
         $salarios = Salario::select('id', 'salario')->get();
         $categorias = Categoria::select('id', 'categoria')->get();
         return view(
-            'livewire.filtrar-vacantes',
+            'livewire.vacantes.components.filtrar-vacantes',
             [
                 'salarios' => $salarios,
                 'categorias' => $categorias

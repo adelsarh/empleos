@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\GestionCuentasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\ProfileController;
@@ -16,7 +17,7 @@ Route::get('/vacante/{vacante}/edit', [VacanteController::class, 'edit'])->middl
 Route::get('/vacante/{vacante}', [VacanteController::class, 'show'])->name('vacantes.show');
 Route::get('/notificaciones', NotificacionController::class)->middleware(['auth', 'verified', 'checkUserRole'])->name('notificaciones');
 Route::get('/candidato/{vacante}', [CandidatoController::class,'index'])->name('candidatos.index');
-
+Route::resource('user', GestionCuentasController::class);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

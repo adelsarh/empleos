@@ -22,8 +22,8 @@
                             {{ __('Crear vacante') }}
                         </x-nav-link>
 
-                        @if(auth()->user()->rol === UserRoles::ADMINISTRADOR)
-                            <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                        @if(auth()->user()->rol_id === UserRoles::ADMINISTRADOR)
+                            <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                                 {{ __('Gestionar cuentas') }}
                             </x-nav-link>
 

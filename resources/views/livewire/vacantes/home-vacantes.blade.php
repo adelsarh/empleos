@@ -1,6 +1,6 @@
 <div>
 
-    <livewire:filtrar-vacantes />
+    <livewire:vacantes.components.filtrar-vacantes />
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto">

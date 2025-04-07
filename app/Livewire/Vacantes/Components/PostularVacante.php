@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Vacante;
 use App\Notifications\NuevoCandidato;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Livewire\Attributes\Validate; 
 
 
 class PostularVacante extends Component
@@ -14,12 +14,12 @@ class PostularVacante extends Component
     use WithFileUploads;
 
     #[Validate('required|mimes:pdf|max:1024')]
-    public $cv; 
+    public $cv;
     public $vacante;
 
     public function mount(Vacante $vacante)
     {
-        
+
     }
 
     public function postularse()
@@ -50,6 +50,6 @@ class PostularVacante extends Component
 
     public function render()
     {
-        return view('livewire.postular-vacante');
+        return view('livewire.vacantes.components.postular-vacante');
     }
 }

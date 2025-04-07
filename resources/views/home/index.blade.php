@@ -8,5 +8,5 @@
         </div>
     </div>
 
-    <livewire:home-vacantes />
+    <livewire:vacantes.home-vacantes />
 </x-app-layout>

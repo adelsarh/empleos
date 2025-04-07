@@ -31,31 +31,36 @@
         </div>
     </div>
 
-    <div class="md:grid md:grid-cols-6 gap-4"> 
+    <div class="md:grid md:grid-cols-6 gap-4">
         <div class="md:col-span-2">
-            <img class="rounded-xl" 
+            <img class="rounded-xl"
             src='{{ asset('storage/vacantes/' . $vacante->imagen)}}' alt="vacante">
 
         </div>
 
         <div class="md:col-span-4">
             <h2 class="font-bold text-2xl text-gray-800 my-3">Descripción del puesto</h2>
-            <p>{{ $vacante->descripcion}}</p>
+            <p class="text-gray-700 leading-relaxed ">
+                {!! nl2br(e($vacante->descripcion)) !!}
+            </p>
         </div>
     </div>
 
     @guest
         <div class="mt-5 bg-gray-50 border-dashed p-5 text-center">
             <p>¿Te gustaría postularte a esta vacante?
-                <a href="{{ route('register') }}" 
-                    class="inline-block bg-green-500 text-white py-2 px-4 rounded">
+                <a href="{{ route('register') }}"
+                   class="inline-block bg-green-500 text-white py-2 px-4 rounded">
                     Postularme
                 </a>
             </p>
         </div>
     @endguest
 
-    @cannot('create', App\Models\Vacante::class)
-         <livewire:postular-vacante :vacante="$vacante" />   
-    @endcannot
+    @auth
+        @cannot('create', App\Models\Vacante::class)
+            <livewire:vacantes.components.postular-vacante :vacante="$vacante" />
+        @endcannot
+    @endauth
+
 </div>

@@ -4,7 +4,6 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"/>
-
 @endpush
 
 <form action="" class="md:w-1/2 space-y-5" wire:submit.prevent='crearVacante' novalidate>
@@ -108,7 +107,6 @@
                       accept="image/*"
         />
 
-
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
             800x400px).</p>
 
@@ -121,7 +119,6 @@
 
             @endif
         </div>
-
 
         <x-input-error :messages="$errors->get('imagen')" class="mt-2"/>
     </div>

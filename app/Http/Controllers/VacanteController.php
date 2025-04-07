@@ -56,6 +56,4 @@ class VacanteController extends Controller
             'vacante' => $vacante
         ]);
     }
-
-    
 }

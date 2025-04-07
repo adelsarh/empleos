@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Vacante;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On; 
 
 class MostrarVacantes extends Component
 {
-
     use WithPagination;
 
-    #[On('eliminarVacante')] 
-
-    public function eliminarVacante(Vacante $vacante){
+    #[On('eliminarVacante')]
+    public function eliminarVacante(Vacante $vacante)
+    {
         $vacante->delete();
     }
 
@@ -23,9 +22,8 @@ class MostrarVacantes extends Component
         $vacantes = Vacante::where('user_id', auth()->user()->id)
                             ->orderBy('created_at', 'desc')
                             ->paginate(10);
-        
-        return view('livewire.mostrar-vacantes',
-        [
+
+        return view('livewire.vacantes.components.mostrar-vacantes', [
             'vacantes' => $vacantes
         ]);
     }
