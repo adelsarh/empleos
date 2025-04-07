@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Vacante;
 use Illuminate\Auth\Access\Response;
+use App\Enums\UserRoles;
 
 class VacantePolicy
 {
@@ -13,7 +14,7 @@ class VacantePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->rol === 2;
+        return $user->rol === UserRoles::RECLUTADOR || $user->rol === UserRoles::ADMINISTRADOR;
     }
 
     /**
@@ -29,7 +30,7 @@ class VacantePolicy
      */
     public function create(User $user): bool
     {
-        return $user->rol === 2;
+        return $user->rol === UserRoles::RECLUTADOR || $user->rol === UserRoles::ADMINISTRADOR;
     }
 
     /**

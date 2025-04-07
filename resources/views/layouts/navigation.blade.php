@@ -1,12 +1,13 @@
+@php use App\Enums\UserRoles; @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('vacantes.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block fill-current text-gray-800" />
                     </a>
                 </div>
 
@@ -20,6 +21,16 @@
                         <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
                             {{ __('Crear vacante') }}
                         </x-nav-link>
+
+                        @if(auth()->user()->rol === UserRoles::ADMINISTRADOR)
+                            <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                                {{ __('Gestionar cuentas') }}
+                            </x-nav-link>
+
+                            <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                                {{ __('Gestionar pagos') }}
+                            </x-nav-link>
+                        @endif
                     </div>
                     @endcan
                 @endauth
@@ -70,15 +81,20 @@
 
                 @guest
                     <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('login')" class="bg-yellow-500 text-white">
-                            {{ __('Iniciar sesión') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('register')">
-                            {{ __('Crear cuenta') }}
-                        </x-nav-link>
-                    </div>
-                @endguest
+                        <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('login')">
+                                <x-primary-button class="px-6 py-3">
+                                    {{ __('Iniciar sesión') }}
+                                </x-primary-button>
+                            </x-nav-link>
+                            <x-nav-link :href="route('register')">
+                                <x-secondary-button>
+                                    {{ __('Crear cuenta') }}
+                                </x-secondary-button>
+                            </x-nav-link>
+                        </div>
+
+                    @endguest
             </div>
 
             <!-- Hamburger -->

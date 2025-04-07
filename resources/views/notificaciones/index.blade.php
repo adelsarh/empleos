@@ -11,28 +11,30 @@
                 <div class="p-6 text-gray-900">
 
                     <h1 class="text-2xl font-semibold text-center mb-10">Mis notificaciones</h1>
-                    @forelse ($notificaciones as $notificacion)
-                        <div class="mb-4 p-5 border border-gray-200 md:flex md:justify-between md:items-center">
 
-                            <div>
+                    <div class="divide-y divide-gray-200">
 
-                                <p> Tienes un nuevo candidato en:
-                                    <span class="font-bold">{{ $notificacion->data['nombre_vacante'] }}</span>
-                                </p>
+                        @forelse ($notificaciones as $notificacion)
+                            <div class="mb-4 p-5 md:flex md:justify-between md:items-center">
 
-                                <p>
-                                    <span class="font-bold">{{ $notificacion->created_at->diffForHumans() }}</span>
-                                </p>
+                                <div>
+
+                                    <p> Tienes un nuevo candidato en:
+                                        <span class="font-bold">{{ $notificacion->data['nombre_vacante'] }}</span>
+                                    </p>
+
+                                    <p>
+                                        <span class="font-bold">{{ $notificacion->created_at->diffForHumans() }}</span>
+                                    </p>
+                                </div>
+
+                                <div class="mt-5 md:mt-0">
+                                    <a class="bg-yellow-500 p-4 rounded-lg text-white" href="{{ route('candidatos.index', $notificacion->data['id_vacante']) }}">Ver candidatos</a>
+                                </div>
                             </div>
-
-                            <div class="mt-5 md:mt-0">
-                                <a class="bg-yellow-500 p-4 rounded-lg text-white" href="#">Ver candidatos</a>
-                            </div>
-                        </div>
-                    @empty
-                        <p>No tienes notificaciones</p>
-                    @endforelse
-                    <div class="md:flex md:justify-center p-5">
+                        @empty
+                            <p>No tienes notificaciones</p>
+                        @endforelse
                     </div>
                 </div>
             </div>

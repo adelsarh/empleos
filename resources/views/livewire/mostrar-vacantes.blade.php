@@ -20,9 +20,10 @@
                 </div>
 
                 <div class="flex flex-col items-stretch gap-3 mt-5 md:flex-row md:items-center md:mt-0 ">
-                    <a href=""
+                    <a href="{{ route('candidatos.index', $vacante->id)}}"
                        class="bg-slate-800 py-2 px-4 rounded-lg text-white text-sm font-bold text-center ">
-                        Candidatos
+                       <span class="text-white"> {{ $vacante->candidatos->count() }}</span>
+                        Candidatos 
                     </a>
 
                     <a href="{{ route('vacantes.edit', $vacante->id) }}"
