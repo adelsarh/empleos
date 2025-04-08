@@ -30,7 +30,15 @@ class VacantePolicy
      */
     public function create(User $user): bool
     {
-        return $user->rol_id === UserRoles::RECLUTADOR || $user->rol_id === UserRoles::ADMINISTRADOR;
+        // Solo admin puede saltarse la validación de pago
+        if ($user->rol_id === UserRoles::ADMINISTRADOR) {
+            return true;
+        }elseif ($user->rol_id === UserRoles::POSTULANTE) {
+            return false;
+        }
+
+        // Reclutadores necesitan pago vigente y créditos
+        return $user->hasActivePayment();
     }
 
     /**

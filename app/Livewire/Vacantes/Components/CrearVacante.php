@@ -4,6 +4,7 @@ namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Categoria;
 use App\Models\Salario;
+use App\Models\User;
 use App\Models\Vacante;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -39,16 +40,24 @@ class CrearVacante extends Component
         $imagen = $this->imagen->store(path: 'vacantes');
         $nombreImagen = str_replace('vacantes/', '', $imagen);
 
-        Vacante::create([
-            'titulo' => $datos['titulo'],
-            'salario_id' => $datos['salario'],
-            'categoria_id' => $datos['categoria'],
-            'empresa' => $datos['empresa'],
-            'ultimo_dia' => $datos['ultimo_dia'],
-            'descripcion' => $datos['descripcion'],
-            'imagen' => $nombreImagen,
-            'user_id' => auth()->user()->id
-        ]);
+        try {
+            Vacante::create([
+                'titulo' => $datos['titulo'],
+                'salario_id' => $datos['salario'],
+                'categoria_id' => $datos['categoria'],
+                'empresa' => $datos['empresa'],
+                'ultimo_dia' => $datos['ultimo_dia'],
+                'descripcion' => $datos['descripcion'],
+                'imagen' => $nombreImagen,
+                'user_id' => auth()->user()->id
+            ]);
+
+            User::find(auth()->user()->id, 'id')->decrement('creditos', 1);
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('error', 'Error al crear la vacante: ' . $e->getMessage());
+            return;
+        }
 
         session()->flash('success', 'La vacante se publicó correctamente.');
 
@@ -59,7 +68,6 @@ class CrearVacante extends Component
 
     public function render()
     {
-
         //consultar base de datos para salarios
         $salarios = Salario::all();
         $categorias = Categoria::all();

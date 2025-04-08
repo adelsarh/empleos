@@ -6,6 +6,10 @@
         </div>
     @endif
 
+    <div>
+        <span>Tienes {{ auth()->user()->creditos }} creditos disponibles</span>
+    </div>
+
     @forelse($vacantes as $vacante)
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg my-4">
             <div class="p-6 text-gray-900 md:flex md:justify-between">
@@ -23,7 +27,7 @@
                     <a href="{{ route('candidatos.index', $vacante->id)}}"
                        class="bg-slate-800 py-2 px-4 rounded-lg text-white text-sm font-bold text-center ">
                        <span class="text-white"> {{ $vacante->candidatos->count() }}</span>
-                        Candidatos 
+                        Candidatos
                     </a>
 
                     <a href="{{ route('vacantes.edit', $vacante->id) }}"

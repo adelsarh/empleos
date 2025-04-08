@@ -39,12 +39,9 @@ class PostularVacante extends Component
         //crear notificacion
         $this->vacante->reclutador->notify(new NuevoCandidato($this->vacante->id, $this->vacante->titulo, auth()->user()->id));
 
-
         session()->flash('message', 'Se envio correctamente tu postulación, ¡mucha suerte!');
 
         return redirect()->back();
-
-
     }
 
 

@@ -17,7 +17,7 @@ class NuevoCandidato extends Notification
     public function __construct($id_vacante, $nombre_vacante, $usuario_id)
     {
         $this->id_vacante = $id_vacante;
-        $this->nombre_vacante = $nombre_vacante; 
+        $this->nombre_vacante = $nombre_vacante;
         $this->usuario_id = $usuario_id;
     }
 
@@ -48,9 +48,8 @@ class NuevoCandidato extends Notification
 
     public function toDatabase(object $notifiable): array
     {
-
         return [
-            'id_vacante' => $this->id_vacante, 
+            'id_vacante' => $this->id_vacante,
             'nombre_vacante' => $this->nombre_vacante,
             'usuario_id' => $this->usuario_id
         ];

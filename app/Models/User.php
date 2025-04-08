@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,6 +25,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'rol_id',
         'estado',
+        'creditos',
+        'ultimo_pago_valido',
+
     ];
 
     /**
@@ -49,8 +53,23 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsTo(Roles::class, 'rol_id');
     }
+
+    public function transacciones(){
+        return $this->hasMany(Transaccion::class);
+    }
+
+    public function hasActivePayment(): bool
+    {
+        if ($this->rol_id !== UserRoles::RECLUTADOR) {
+            return true;
+        }
+
+        return $this->ultimo_pago_valido && $this->creditos > 0;
+    }
+
 
 }

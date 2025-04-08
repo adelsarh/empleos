@@ -27,7 +27,7 @@
                                 {{ __('Gestionar cuentas') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                            <x-nav-link :href="route('transaccion.index')" :active="request()->routeIs('transaccion.index')">
                                 {{ __('Gestionar pagos') }}
                             </x-nav-link>
                         @endif
