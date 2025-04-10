@@ -1,9 +1,9 @@
 <x-app-layout>
 
-    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 my-10">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 my-10 mb-8">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800">Confirmar Plan: <span
-                    class="text-indigo-600">{{ $plan->nombre }}</span></h2>
+                    class="text-yellow-600">{{ $plan->nombre }}</span></h2>
             <p class="text-gray-600 mt-2">Precio: <span
                     class="font-semibold">${{ number_format($plan->precio, 2) }}</span>
             </p>
@@ -19,13 +19,13 @@
                     Referencia Bancaria (opcional)
                 </label>
                 <input type="text" name="referencia" id="referencia"
-                       class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                       placeholder="Ej: 12345678">
+                       class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                       placeholder="Ej: 12345678"
+                          value="{{ old('referencia') }}"
+                >
 
 
-                @error('referencia')
-                <span>{{ $message }} </span>
-                @enderror
+                <x-input-error :messages="$errors->get('referencia')" class="mt-2"/>
             </div>
 
             <!-- Input Comprobante -->
@@ -38,13 +38,11 @@
                           file:mr-4 file:py-2 file:px-4
                           file:rounded-lg file:border-0
                           file:text-sm file:font-semibold
-                          file:bg-indigo-50 file:text-indigo-700
-                          hover:file:bg-indigo-100">
+                          file:bg-yellow-50 file:text-yellow-700
+                          hover:file:bg-yellow-100">
                 <p class="mt-1 text-xs text-gray-500">Formatos: PDF, JPG, PNG (Máx. 2MB)</p>
 
-                @error('comprobante')
-                <span>{{ $message }} </span>
-                @enderror
+                <x-input-error :messages="$errors->get('comprobante')" class="mt-2"/>
             </div>
 
             <!-- Botones -->
@@ -53,10 +51,11 @@
                    class="text-gray-600 hover:text-gray-800 font-medium">
                     ← Volver a planes
                 </a>
-                <button type="submit"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
-                    Enviar Comprobante
-                </button>
+
+                <x-primary-button class="font-bold">
+                    {{ __('Enviar Comprobante') }}
+                </x-primary-button>
+
             </div>
         </form>
     </div>

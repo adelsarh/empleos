@@ -15,17 +15,21 @@ class PostularVacante extends Component
 
     #[Validate('required|mimes:pdf|max:1024')]
     public $cv;
+
     public $vacante;
+    public $yaAplico;
 
-    public function mount(Vacante $vacante)
+    public function mount()
     {
-
+        // Asumiendo que candidatos tiene user_id (relación con usuarios)
+        $this->yaAplico = $this->vacante->candidatos()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     public function postularse()
     {
         $this->validate();
-
         //almacenar el CV
         $cv = $this->cv->store(path: 'cv');
         $cvRuta = str_replace('cv/', '', $cv);
@@ -47,6 +51,8 @@ class PostularVacante extends Component
 
     public function render()
     {
-        return view('livewire.vacantes.components.postular-vacante');
+        return view('livewire.vacantes.components.postular-vacante', [
+            'yaAplico' => $this->yaAplico
+        ]);
     }
 }

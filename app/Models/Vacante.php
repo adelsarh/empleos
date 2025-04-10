@@ -21,7 +21,7 @@ class Vacante extends Model
         'user_id'
     ];
 
-    public function salario(){ 
+    public function salario(){
         return $this->belongsTo(Salario::class);
     }
 
@@ -38,5 +38,9 @@ class Vacante extends Model
     public function reclutador()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function scopeDisponibles($query)
+    {
+        return $query->where('ultimo_dia', '>=', now());
     }
 }

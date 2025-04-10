@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Vacantes\Components;
 
+use App\Enums\UserRoles;
 use App\Models\Categoria;
 use App\Models\Salario;
 use App\Models\User;
@@ -30,7 +31,7 @@ class CrearVacante extends Component
         'empresa' => 'required',
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
-        'imagen' => 'required|image|max:1024',
+        'imagen' => 'required|mimes:jpg,png,jpeg|max:1024',
     ];
 
     public function crearVacante(){
@@ -52,7 +53,10 @@ class CrearVacante extends Component
                 'user_id' => auth()->user()->id
             ]);
 
-            User::find(auth()->user()->id, 'id')->decrement('creditos', 1);
+            //si el usuario no es administrador, se le resta un credito
+            auth()->user()->rol_id !== UserRoles::ADMINISTRADOR
+                ? auth()->user()->decrement('creditos', 1)
+                : null;
 
         }catch (\Illuminate\Database\QueryException $e) {
             session()->flash('error', 'Error al crear la vacante: ' . $e->getMessage());

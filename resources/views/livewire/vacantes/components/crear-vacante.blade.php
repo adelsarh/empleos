@@ -103,12 +103,12 @@
                       type="file"
                       wire:model.live="imagen"
                       required
-                      autofocus
-                      accept="image/*"
+
+                      accept="image/png, image/jpeg, image/jpg"
         />
 
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
-            800x400px).</p>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG o JPEG (MAX.
+            1MB).</p>
 
         <div class="my-5 w-80">
             @if($imagen)

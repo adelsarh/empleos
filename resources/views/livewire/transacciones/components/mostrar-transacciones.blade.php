@@ -110,7 +110,7 @@
 
                                         <button
                                             wire:click="$dispatch('mostrarConfirmacion', {{ $transaccion->id }})"
-                                            class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                                            class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
                                         >
                                             Aprobar
                                         </button>
@@ -124,7 +124,7 @@
                                            class="text-blue-600 hover:text-blue-900">
                                             Ver Comprobante
                                         </a>
-                                        <span class="text-sm text-gray-500">
+                                        <span class="text-sm text-gray-500 font-semibold">
                                             Aprobado por: {{ $transaccion->aprobador->name }}
                                          </span>
                                     </div>
@@ -162,29 +162,27 @@
                 text: "Esta acción no se puede revertir",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#f4f4f4",
-                confirmButtonText: "Sí, aprobar",
+                confirmButtonColor: "#22c55e",
+                cancelButtonColor: "#b4b4b4",
+                confirmButtonText: "Sí, aprobar transacción",
                 cancelButtonText: "Cancelar",
                 allowOutsideClick: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Disparamos el evento de eliminación
                     Livewire.dispatch('confirmarTransaccion', {transaccion: transaccionId});
+
+                    Swal.fire({
+                        title: "¡Aprobada!",
+                        text: "La transaccion ha sido comprobada correctamente",
+                        icon: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
                 }
             });
         });
 
-        // Listener para mostrar confirmación de eliminación exitosa
-        Livewire.on('usuarioEliminado', () => {
-            Swal.fire({
-                title: "¡Aprobada!",
-                text: "La transaccion ha sido comprobada correctamente",
-                icon: "success",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        });
 
     </script>
     @endscript

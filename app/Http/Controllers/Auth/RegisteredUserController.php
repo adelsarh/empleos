@@ -30,10 +30,18 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'rol' => ['required', 'numeric', 'between:1,2']
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed', // Asegura que coincida con password_confirmation
+            'rol' => 'required|in:1,2' // Solo permite 1 (Desarrollador) o 2 (Reclutador)
+        ], [
+            'name.required' => 'El nombre es obligatorio',
+            'email.required' => 'El correo es obligatorio',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'rol.required' => 'Debes seleccionar un tipo de cuenta.',
+            'rol.in' => 'Rol no válido.',
         ]);
 
         $user = User::create([
@@ -43,7 +51,7 @@ class RegisteredUserController extends Controller
             'rol_id' => $request->rol
         ]);
 
-        event(new Registered($user));
+        //event(new Registered($user));
 
         Auth::login($user);
 

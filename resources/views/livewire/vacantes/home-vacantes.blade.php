@@ -1,61 +1,88 @@
-<div>
-
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Componente de filtrado -->
     <livewire:vacantes.components.filtrar-vacantes />
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto">
-            <h3 class="font-extrabold text-4xl text-gray-800 mb-12">Nuestras vacantes disponibles</h3>
-
-            <div class="bg-white shadow-sm rounded-lg p-6">
-                @forelse ($vacantes as $vacante)
-                    <div class="md:flex md:justify-between md:items-center py-6 bg-white rounded-2xl shadow-md mt-6 hover:shadow-lg transition-shadow p-6 space-y-4 md:space-y-0">
-                        <div class="md:flex-1 space-y-2">
-                            <a class="text-3xl font-extrabold text-gray-800 hover:text-gray-900 transition-colors" href="{{ route('vacantes.show', $vacante->id) }}">
-                                {{ $vacante->titulo }}
-                            </a>
-                            <p class="text-gray-500 text-base flex items-center gap-2">
-
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 32 32"><path fill="#666666" d="M8 8h2v4H8zm0 6h2v4H8zm6-6h2v4h-2zm0 6h2v4h-2zm-6 6h2v4H8zm6 0h2v4h-2z"/><path fill="#666666" d="M30 14a2 2 0 0 0-2-2h-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v26h28ZM4 4h16v24H4Zm18 24V14h6v14Z"/></svg>
-                                {{ $vacante->empresa }}
-                            </p>
-                            <p class="font-bold text-sm text-gray-600 flex items-center gap-2">
-
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><g fill="none" stroke="#ef4444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M12 6v6h6"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"/></g></svg>
-                                Último día para postularse:
-                                <span class="font-normal text-gray-700">{{ $vacante->ultimo_dia->format('m/d/Y') }}</span>
-                            </p>
-
-                            <p class="font-bold text-sm text-gray-600 flex items-center gap-2">
-
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="none" stroke="#eab308" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.857 12.506C6.37 10.646 4.596 8.6 3.627 7.45c-.3-.356-.398-.617-.457-1.076c-.202-1.572-.303-2.358.158-2.866S4.604 3 6.234 3h11.532c1.63 0 2.445 0 2.906.507c.461.508.36 1.294.158 2.866c-.06.459-.158.72-.457 1.076c-.97 1.152-2.747 3.202-5.24 5.065a1.05 1.05 0 0 0-.402.747c-.247 2.731-.475 4.227-.617 4.983c-.229 1.222-1.96 1.957-2.888 2.612c-.552.39-1.222-.074-1.293-.678a196 196 0 0 1-.674-6.917a1.05 1.05 0 0 0-.402-.755" color="#eab308"/></svg>
-
-                                Categoría: <span class="font-normal text-gray-700">{{ $vacante->categoria->categoria }}</span>
-                            </p>
-
-                            <p class="text-gray-700 flex items-center gap-2 text-lg font-semibold">
-
-                                <svg class="w-5 h-5 xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 256 256"><path fill="#16a34a" d="M128 166a38 38 0 1 0-38-38a38 38 0 0 0 38 38m0-64a26 26 0 1 1-26 26a26 26 0 0 1 26-26m112-44H16a6 6 0 0 0-6 6v128a6 6 0 0 0 6 6h224a6 6 0 0 0 6-6V64a6 6 0 0 0-6-6M22 108.82A54.73 54.73 0 0 0 60.82 70h134.36A54.73 54.73 0 0 0 234 108.82v38.36A54.73 54.73 0 0 0 195.18 186H60.82A54.73 54.73 0 0 0 22 147.18Zm212-12.53A42.8 42.8 0 0 1 207.71 70H234ZM48.29 70A42.8 42.8 0 0 1 22 96.29V70ZM22 159.71A42.8 42.8 0 0 1 48.29 186H22ZM207.71 186A42.8 42.8 0 0 1 234 159.71V186Z"></path></svg>
-
-                                Salario: <span class="text-green-700">{{ $vacante->salario->salario }} / mes</span>
-                            </p>
-                        </div>
-                        <div class="mt-4 md:mt-0">
-                            <a href="{{ route('vacantes.show', $vacante->id) }}">
-                                <x-primary-button>
-                                    {{ 'Ver vacante' }}
-                                </x-primary-button>
-
-                            </a>
-                        </div>
-                    </div>
-                @empty
-                    <p>No hay vacantes</p>
-                @endforelse
-            </div>
-        </div>
-
-
-
+    <!-- Título principal -->
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-2">Nuestras Vacantes Disponibles</h2>
+        <p class="text-lg text-gray-600">Encuentra la oportunidad perfecta para tu carrera profesional</p>
     </div>
 
+    <!-- Grid de 3 columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @forelse ($vacantes as $vacante)
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col h-full">
+                <!-- Imagen de la vacante (opcional) -->
+                <div class="h-40 bg-gray-100 overflow-hidden">
+                    <img class="w-full h-full object-cover"
+                         src="{{ asset('storage/vacantes/' . $vacante->imagen) }}"
+                         alt="{{ $vacante->titulo }}">
+                </div>
+
+                <!-- Contenido -->
+                <div class="p-6 flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            {{ $vacante->categoria->categoria }}
+                        </span>
+                        <span class="text-xs text-gray-500">{{ $vacante->created_at->diffForHumans() }}</span>
+                    </div>
+
+                    <a href="{{ route('vacantes.show', $vacante->id) }}" class="block">
+                        <h3 class="text-xl font-bold text-gray-900 hover:text-yellow-600 transition-colors mb-2 line-clamp-2">
+                            {{ $vacante->titulo }}
+                        </h3>
+                    </a>
+
+                    <p class="text-gray-600 mb-4 flex items-center">
+                        <svg class="w-4 h-4 mr-1 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                        </svg>
+                        Cierre: {{ $vacante->ultimo_dia->format('d/m/Y') }}
+                    </p>
+
+                    <div class="flex items-center text-gray-700 mb-4">
+                        <svg class="w-4 h-4 mr-1 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg>
+                        {{ $vacante->empresa }}
+                    </div>
+
+                    <div class="flex items-center text-lg font-semibold text-gray-900 mb-4">
+                        <svg class="w-4 h-4 mr-1 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                        </svg>
+                        {{ $vacante->salario->salario }}
+                    </div>
+                </div>
+
+                <!-- Footer de la tarjeta -->
+                <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
+                    <a href="{{ route('vacantes.show', $vacante->id) }}" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-200">
+                        Ver detalles
+                        <svg class="ml-2 -mr-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full text-center py-12">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="mt-2 text-lg font-medium text-gray-900">No hay vacantes disponibles</h3>
+                <p class="mt-1 text-gray-500">Prueba ajustando tus filtros de búsqueda.</p>
+            </div>
+        @endforelse
+    </div>
+
+    <!-- Paginación (si es necesario) -->
+    @if($vacantes->hasPages())
+        <div class="mt-8">
+            {{ $vacantes->links() }}
+        </div>
+    @endif
 </div>

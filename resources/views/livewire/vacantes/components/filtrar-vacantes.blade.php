@@ -2,7 +2,7 @@
     <h2 class="text-2xl md:text-4xl text-gray-600 text-center font-extrabold my-5">Buscar y Filtrar Vacantes</h2>
 
     <div class="max-w-7xl mx-auto">
-            <form wire:submit="leerDatosFormulario">
+        <form wire:submit="leerDatosFormulario">
             <div class="md:grid md:grid-cols-3 gap-5">
                 <div class="mb-5">
                     <label
@@ -41,12 +41,18 @@
                 </div>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-2">
+                <button wire:click="$dispatch('limpiarFiltros');" type="button"
+                        class=" hover:bg-red-600 transition-colors font-semibold text-xs text-black underline uppercase tracking-widest px-10 py-2 rounded-3xl cursor-pointer w-full md:w-auto">
+                    Limpiar
+                </button>
+
                 <input
                     type="submit"
                     class="bg-yellow-500 hover:bg-yellow-600 transition-colors font-semibold text-xs text-white uppercase tracking-widest px-10 py-2 rounded-3xl cursor-pointer w-full md:w-auto"
                     value="Buscar"
                 />
+
             </div>
         </form>
     </div>

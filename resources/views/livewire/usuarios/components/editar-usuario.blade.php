@@ -31,7 +31,7 @@
                       wire:model.live="email"
                       :value="old('email')"
                       required
-                      disbaled
+                      disabled
                       autofocus
         />
         <x-input-error :messages="$errors->get('empresa')" class="mt-2"/>
