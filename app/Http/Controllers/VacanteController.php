@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRoles;
 use App\Models\Salario;
 use App\Models\User;
 use App\Models\Vacante;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class VacanteController extends Controller
 {
@@ -37,26 +40,27 @@ class VacanteController extends Controller
      */
     public function show(Vacante $vacante)
     {
+       $this->authorize('view', $vacante);
 
-      $this->authorize('view', $vacante);
-
-       return view('vacantes.show',
-        [
-            'vacante' => $vacante
-        ]);
+        return view('vacantes.show',
+            [
+                'vacante' => $vacante
+            ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vacante $vacante)
+    public
+    function edit(Vacante $vacante)
     {
 
         $this->authorize('update', $vacante);
 
         return view('vacantes.edit',
-        [
-            'vacante' => $vacante
-        ]);
+            [
+                'vacante' => $vacante
+            ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Vacantes\Components;
 
 use App\Models\Vacante;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,6 +15,10 @@ class MostrarVacantes extends Component
     #[On('eliminarVacante')]
     public function eliminarVacante(Vacante $vacante)
     {
+        if($vacante->imagen){
+            Storage::delete('vacantes/' . $vacante->imagen);
+        }
+
         $vacante->delete();
     }
 

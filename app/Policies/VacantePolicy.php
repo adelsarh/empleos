@@ -4,8 +4,10 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Vacante;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Access\Response;
 use App\Enums\UserRoles;
+use Illuminate\Support\Facades\Auth;
 
 class VacantePolicy
 {
@@ -20,12 +22,34 @@ class VacantePolicy
     /**
      * Determine whether the user can view the model.
      */
+
     public function view(User $user, Vacante $vacante): bool
     {
-        return $vacante->disponibles ||
-            $user->id === $vacante->user_id ||
-            $user->rol_id === UserRoles::ADMINISTRADOR;
+        switch ($user->rol_id) {
+            case UserRoles::POSTULANTE:
+                $this->vacanteDisponible($vacante);
+                return true;
+
+            case UserRoles::RECLUTADOR:
+                if ($user->id !== $vacante->user_id) {
+                    $this->vacanteDisponible($vacante);
+                }
+                return true;
+
+            case UserRoles::ADMINISTRADOR:
+                return true;
+
+            default:
+                return false;
+        }
     }
+    private function vacanteDisponible(Vacante $vacante): void
+    {
+        if ($vacante->ultimo_dia <= now()) {
+            throw new AuthorizationException('Lo sentimos, esta vacante no está disponible.');
+        }
+    }
+
 
     /**
      * Determine whether the user can create models.
@@ -35,7 +59,7 @@ class VacantePolicy
         // Solo admin puede saltarse la validación de pago
         if ($user->rol_id === UserRoles::ADMINISTRADOR) {
             return true;
-        }elseif ($user->rol_id === UserRoles::POSTULANTE) {
+        } elseif ($user->rol_id === UserRoles::POSTULANTE) {
             return false;
         }
 

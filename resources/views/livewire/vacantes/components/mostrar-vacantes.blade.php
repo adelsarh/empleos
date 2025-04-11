@@ -53,9 +53,19 @@
             <div class="p-6 text-gray-900 md:flex md:justify-between">
 
                 <div class="leading-10">
-                    <a href="{{ route('vacantes.show', $vacante->id)}}" class="text-xl font-semibold md:font-bold">
-                        {{ $vacante->titulo }}
+                    <a href="{{ route('vacantes.show', $vacante->id) }}"
+                       class="flex items-center justify-between group">
+
+                        <h2 class="text-xl md:text-2xl font-semibold md:font-bold text-yellow-600 group-hover:underline transition">
+                            {{ $vacante->titulo }}
+                        </h2>
+
+                        <span class="text-sm px-2 py-0.5 rounded-full ml-2
+                            {{ $vacante->ultimo_dia >= now() ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600' }}">
+                            {{ $vacante->ultimo_dia >= now() ? 'Activa' : 'Venció' }}
+                        </span>
                     </a>
+
 
                     <p class="text-sm text-gray-600 font-bold"> {{ $vacante->empresa }}</p>
                     <p class="text-sm text-gray-500">Último
