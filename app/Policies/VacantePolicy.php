@@ -23,18 +23,27 @@ class VacantePolicy
      * Determine whether the user can view the model.
      */
 
-    public function view(User $user, Vacante $vacante): bool
+    public function view(?User $user, Vacante $vacante): bool
     {
+        // Visitante (no autenticado)
+        if (is_null($user)) {
+            $this->vacanteDisponible($vacante);
+            return true;
+        }
+
+        // Usuarios autenticados
         switch ($user->rol_id) {
             case UserRoles::POSTULANTE:
                 $this->vacanteDisponible($vacante);
                 return true;
 
             case UserRoles::RECLUTADOR:
-                if ($user->id !== $vacante->user_id) {
+                if ($user->id === $vacante->user_id) {
+                    return true;
+                } else {
                     $this->vacanteDisponible($vacante);
+                    return true;
                 }
-                return true;
 
             case UserRoles::ADMINISTRADOR:
                 return true;
@@ -43,12 +52,14 @@ class VacantePolicy
                 return false;
         }
     }
+
     private function vacanteDisponible(Vacante $vacante): void
     {
         if ($vacante->ultimo_dia <= now()) {
-            throw new AuthorizationException('Lo sentimos, esta vacante no está disponible.');
+            throw new AuthorizationException('Lo sentimos, esta vacante ya no está disponible.');
         }
     }
+
 
 
     /**
