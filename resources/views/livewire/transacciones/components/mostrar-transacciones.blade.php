@@ -72,7 +72,7 @@
                             <!-- Celdas... -->
                         <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $transaccion->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 capitalize">{{ $transaccion->user->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 capitalize">{{ $transaccion->user->email }}</td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $transaccion->plan->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $transaccion->plan->precio }}</td>

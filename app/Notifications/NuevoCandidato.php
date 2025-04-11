@@ -36,14 +36,17 @@ class NuevoCandidato extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-
         $url = url('/notificaciones');
 
         return (new MailMessage)
-                    ->line('Has recibido un nuevo candidato en tu vacante.')
-                   ->line('La vacante es: ' . $this->nombre_vacante)
-                    ->action('Ver notificaciones', $url)
-                    ->line('Gracias por utilizar nuestra plataforma!');
+            ->subject('¡Nuevo candidato para tu vacante!')
+            ->greeting('Hola ' . $notifiable->name . ',')
+            ->line('Tenemos buenas noticias: has recibido un nuevo candidato para tu vacante.')
+            ->line('**Vacante:** ' . $this->nombre_vacante)
+            ->action('Revisar candidato', $url)
+            ->line('No dejes pasar esta oportunidad de encontrar al talento ideal.')
+            ->salutation('Saludos,')
+            ->line('El equipo de ' . config('app.name'));
     }
 
     public function toDatabase(object $notifiable): array
