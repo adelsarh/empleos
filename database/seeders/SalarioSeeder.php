@@ -15,58 +15,26 @@ class SalarioSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('salarios')->insert([
-            'salario' => '$0 - $499',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        $now = date('Y-m-d H:i:s');
 
-        DB::table('salarios')->insert([
-            'salario' => '$500 - $749',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        $salarios = [
+            // Nivel básico/operativo
+            ['salario' => 'Menos de 5,000 L mensuales', 'created_at' => $now, 'updated_at' => $now],
+            ['salario' => '5,000 L - 7,999 L mensuales', 'created_at' => $now, 'updated_at' => $now],
+            ['salario' => '8,000 L - 10,999 L mensuales', 'created_at' => $now, 'updated_at' => $now],
 
-        DB::table('salarios')->insert([
-            'salario' => '$750 - $999',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+            // Nivel técnico/especializado
+            ['salario' => '11,000 L - 14,999 L mensuales', 'created_at' => $now, 'updated_at' => $now],
+            ['salario' => '15,000 L - 19,999 L mensuales', 'created_at' => $now, 'updated_at' => $now],
 
-        DB::table('salarios')->insert([
-            'salario' => '$1000 - $1499',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+            // Nivel profesional
+            ['salario' => '20,000 L - 29,999 L mensuales', 'created_at' => $now, 'updated_at' => $now],
 
-        DB::table('salarios')->insert([
-            'salario' => '$1500 - $1999',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+            // Opciones especiales
+            ['salario' => 'Salario a convenir', 'created_at' => $now, 'updated_at' => $now],
+            ['salario' => 'Por hora/proyecto', 'created_at' => $now, 'updated_at' => $now]
+        ];
 
-        DB::table('salarios')->insert([
-            'salario' => '$2000 - $2499',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('salarios')->insert([
-            'salario' => '$2500 - $2999',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('salarios')->insert([
-            'salario' => '$3000 - $4999',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('salarios')->insert([
-            'salario' => '+$5000',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        DB::table('salarios')->insert($salarios);
     }
 }

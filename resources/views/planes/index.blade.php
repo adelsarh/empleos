@@ -30,8 +30,7 @@
                             <!-- Precio -->
                             <div class="flex items-baseline mb-4">
                                 <span
-                                    class="text-4xl font-extrabold text-yellow-500">${{ number_format($plan->precio, 0) }}</span>
-                                <span class="ml-1 text-lg text-gray-500">/mes</span>
+                                    class="text-4xl font-extrabold text-yellow-500">{{ number_format($plan->precio, 0) }} L</span>
                             </div>
 
                             <!-- Características -->
@@ -54,21 +53,23 @@
                                 </li>
                             </ul>
 
-                            <!-- Botón de compra -->
-                            @if(!$solicitudPendiente)
-                                <a href="{{ route('plan.show', $plan->id) }}" class="block w-full text-center">
-                                    <x-primary-button>
-                                        {{ __('Seleccionar Plan') }}
-                                    </x-primary-button>
-                                </a>
-                                <!-- Mensaje de solicitud pendiente -->
-                            @else($solicitudPendiente)
-                                <div class="mt-4 text-center">
-                                    <p class="text-red-500 font-semibold">Solicitud pendiente</p>
-                                    <p class="text-sm text-gray-500">Tu solicitud está en proceso de revisión.</p>
+                            @can('enviar', $plan)
+                                <!-- Botón de compra -->
+                                @if(!$solicitudPendiente)
+                                    <a href="{{ route('plan.show', $plan->id) }}" class="block w-full text-center">
+                                        <x-primary-button>
+                                            {{ __('Seleccionar Plan') }}
+                                        </x-primary-button>
+                                    </a>
+                                    <!-- Mensaje de solicitud pendiente -->
+                                @else($solicitudPendiente)
+                                    <div class="mt-4 text-center">
+                                        <p class="text-red-500 font-semibold">Solicitud pendiente</p>
+                                        <p class="text-sm text-gray-500">Tu solicitud está en proceso de revisión.</p>
 
-                                </div>
-                            @endif
+                                    </div>
+                                @endif
+                            @endcan
                         </div>
                     </div>
                 @endforeach

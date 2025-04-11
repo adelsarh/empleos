@@ -44,7 +44,7 @@ class NuevaTransaccion extends Notification
             ->line('**Detalles de la transacción:**')
             ->line('🔹 **ID de transacción:** #'.$this->transaccion->id)
             ->line('🔹 **Usuario:** '.$this->transaccion->user->name)
-            ->line('🔹 **Monto:** $'.number_format($this->transaccion->monto, 2))
+            ->line('🔹 **Monto:** L '.number_format($this->transaccion->monto, 2))
             ->line('🔹 **Método de pago:** Depósito bancario')
             ->line('🔹 **Fecha/hora:** '.now()->format('d/m/Y H:i'))
             ->line('') // Espacio en blanco

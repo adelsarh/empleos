@@ -14,6 +14,7 @@ class Vacante extends Model
         'titulo',
         'salario_id',
         'categoria_id',
+        'departamento_id',
         'empresa',
         'ultimo_dia',
         'descripcion',
@@ -42,5 +43,10 @@ class Vacante extends Model
     public function scopeDisponibles($query)
     {
         return $query->where('ultimo_dia', '>=', now());
+    }
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class);
     }
 }

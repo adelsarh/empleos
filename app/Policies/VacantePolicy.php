@@ -60,7 +60,14 @@ class VacantePolicy
         }
     }
 
-
+    public function postularse(User $user): bool
+    {
+        // Solo postulantes pueden postularse
+        if ($user->rol_id !== UserRoles::POSTULANTE) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Determine whether the user can create models.

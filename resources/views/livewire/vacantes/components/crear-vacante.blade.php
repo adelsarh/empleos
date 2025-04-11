@@ -15,11 +15,26 @@
                       type="text"
                       wire:model.live="titulo"
                       :value="old('titulo')"
-                      placeholder="Desarrollador web"
+                      placeholder="Técnico en Electricidad"
                       required
                       autofocus
         />
         <x-input-error :messages="$errors->get('titulo')" class="mt-2"/>
+    </div>
+
+    <div>
+        <x-input-label for="departamento" :value="__('Departamento')"/>
+        <select
+            id="departamento"
+            wire:model.live="departamento"
+            class="rounded-md shadow-sm border-gray-300 focus:ring-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1 w-full"
+        >
+            <option value="">-- Seleccione un departamento --</option>
+            @foreach($departamentos as $departamento)
+                <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('departamento')" class="mt-2"/>
     </div>
 
     <div>
@@ -62,7 +77,7 @@
                       type="text"
                       wire:model.live="empresa"
                       :value="old('empresa')"
-                      placeholder="Facebook Inc."
+                      placeholder="ADELSAR"
                       required
                       autofocus
         />

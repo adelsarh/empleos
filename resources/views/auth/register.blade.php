@@ -18,18 +18,24 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
-        <!-- User Rol -->
+        <!-- user rol -->
         <div class="mt-4">
-            <x-input-label for="rol" :value="__('¿Qué tipo de cuenta deseas crear?')"/>
+            <x-input-label for="rol" :value="__('Selecciona tu perfil de usuario')"/>
 
             <select
                 id="rol"
                 name="rol"
                 class="rounded-md shadow-sm border-gray-300 focus:ring-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1 w-full"
             >
-                <option value="">-- Selecciona un rol--</option>
-                <option value="1" {{ old('rol') == '1' ? 'selected' : '' }}>Desarrollador - Obtener Empleo</option>
-                <option value="2" {{ old('rol') == '2' ? 'selected' : '' }}>Reclutador - Publicar Empleos</option>
+                <option value="">-- ¿Qué tipo de usuario eres? --</option>
+                <option value="1" {{ old('rol') == '1' ? 'selected' : '' }}>
+                    👨‍💻 Busco empleo - Quiero encontrar oportunidades laborales
+                </option>
+                <!--
+                <option value="2" {{ old('rol') == '2' ? 'selected' : '' }}>
+                    👔 Ofrezco empleo - Soy reclutador/empresa que publica vacantes
+                </option>
+                -->
             </select>
 
             <x-input-error :messages="$errors->get('rol')" class="mt-2"/>

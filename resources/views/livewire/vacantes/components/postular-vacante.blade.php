@@ -135,6 +135,8 @@
                     Revisaremos tu perfil y nos pondremos en contacto contigo si eres seleccionado.
                 </p>
 
+
+
             </div>
         </div>
     @endif

@@ -12,7 +12,7 @@
         </div>
 
         <!-- Grid de detalles -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                 <p class="text-xs font-semibold uppercase text-gray-500">Salario</p>
                 <p class="text-lg font-medium text-gray-900 mt-1">{{ $vacante->salario->salario }}</p>
@@ -20,12 +20,7 @@
 
             <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
                 <p class="text-xs font-semibold uppercase text-gray-500">Ubicación</p>
-                <p class="text-lg font-medium text-gray-900 mt-1">Remoto</p>
-            </div>
-
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                <p class="text-xs font-semibold uppercase text-gray-500">Tipo</p>
-                <p class="text-lg font-medium text-gray-900 mt-1">Tiempo completo</p>
+                <p class="text-lg font-medium text-gray-900 mt-1">{{ $vacante->departamento->nombre }}</p>
             </div>
 
             <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -69,24 +64,15 @@
                 <div class="prose prose-indigo max-w-none text-gray-600">
                     {!! nl2br(e($vacante->descripcion)) !!}
                 </div>
-
-                <!-- Requisitos (ejemplo adicional)
-                <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-3">Requisitos</h3>
-                <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                    <li>Experiencia mínima de 2 años en el puesto</li>
-                    <li>Dominio de tecnologías relacionadas</li>
-                    <li>Capacidad para trabajar en equipo</li>
-                </ul>
-                -->
             </div>
 
             <!-- Componente de postulación para autenticados -->
             @auth
-                @cannot('create', App\Models\Vacante::class)
+                @can('postularse', App\Models\Vacante::class)
                     <div class="mt-6">
                         <livewire:vacantes.components.postular-vacante :vacante="$vacante" />
                     </div>
-                @endcannot
+                @endcan
             @endauth
         </div>
     </div>

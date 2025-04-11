@@ -21,15 +21,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        VerifyEmail::toMailUsing( function($notifiable, $url){
+        VerifyEmail::toMailUsing(function($notifiable, $url) {
             return (new MailMessage)
-                ->greeting('¡Hola!')
-                ->subject('Verificar Cuenta')
-                ->line('Tu cuenta ya esta casi lista, solo da click en el siguiente botón.')
-                ->action('Confirmar Cuenta', $url)
-                ->line('Si no solicitaste este correo, puedes ignorar este mensaje.')
-                ->salutation('Saludos')
-                ;
+                ->greeting('¡Hola! 👋')
+                ->subject('Por favor verifica tu cuenta')
+                ->line('¡Estamos emocionados de tenerte con nosotros! Tu cuenta está casi lista.')
+                ->line('Solo falta un paso más: haz clic en el siguiente botón para verificar tu dirección de correo electrónico.')
+                ->action('Verificar mi cuenta', $url)
+                ->line('Si no creaste una cuenta con nosotros, por favor ignora este mensaje.')
+                ->salutation('¡Gracias por unirte a nosotros!')
+                ->line('ADELSAR');
         });
     }
 }

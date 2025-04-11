@@ -7,15 +7,20 @@ use App\Models\Plan;
 use App\Models\Transaccion;
 use App\Models\User;
 use App\Notifications\NuevaTransaccion;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Plan::class);
+
         $solicitudPendiente = $this->solicitudPendiente();
         $planes = Plan::all();
         return view('planes.index', compact('planes', 'solicitudPendiente'));
@@ -27,6 +32,22 @@ class PlanController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Plan $plan, Request $request)
+    {
+        $this->authorize('view', $plan);
+
+        $solicitudPendiente = $this->solicitudPendiente();
+
+        if($solicitudPendiente){
+            return redirect()->route('plan.index')->with('error', 'Ya tienes una solicitud pendiente');
+        }
+
+        return view('planes.checkout', compact('plan'));
     }
 
     /**
@@ -59,21 +80,6 @@ class PlanController extends Controller
 
         return redirect()->route('vacantes.index')->with('success', 'Comprobante enviado, espera la confirmacion');
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Plan $plan, Request $request)
-    {
-        $plan = $plan;
-        $solicitudPendiente = $this->solicitudPendiente();
-
-        if($solicitudPendiente){
-            return redirect()->route('plan.index')->with('error', 'Ya tienes una solicitud pendiente');
-        }
-
-        return view('planes.checkout', compact('plan'));
     }
 
     /**

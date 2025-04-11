@@ -7,31 +7,37 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('vacantes.index') }}">
-                        <x-application-logo class="block fill-current text-gray-800" />
+                        <x-application-logo class="block fill-current text-gray-800"/>
                     </a>
                 </div>
 
                 @auth
-                  @can('create', App\Models\Vacante::class)
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
-                            {{ __('Mis vacantes') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
-                            {{ __('Crear vacante') }}
-                        </x-nav-link>
-
-                        @if(auth()->user()->rol_id === UserRoles::ADMINISTRADOR)
-                            <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                                {{ __('Gestionar cuentas') }}
+                    @can('create', App\Models\Vacante::class)
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
+                                {{ __('Mis vacantes') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('vacantes.create')"
+                                        :active="request()->routeIs('vacantes.create')">
+                                {{ __('Crear vacante') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('transaccion.index')" :active="request()->routeIs('transaccion.index')">
-                                {{ __('Gestionar pagos') }}
-                            </x-nav-link>
-                        @endif
-                    </div>
+                            @if(auth()->user()->rol_id === UserRoles::ADMINISTRADOR)
+                                <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                                    {{ __('Gestionar cuentas') }}
+                                </x-nav-link>
+
+                                <x-nav-link :href="route('transaccion.index')"
+                                            :active="request()->routeIs('transaccion.index')">
+                                    {{ __('Gestionar pagos') }}
+                                </x-nav-link>
+
+                                <x-nav-link :href="route('plan.index')" :active="request()->routeIs('plan.index')">
+                                    {{ __('Planes') }}
+                                </x-nav-link>
+                            @endif
+                        </div>
                     @endcan
                 @endauth
             </div>
@@ -42,7 +48,7 @@
                 @auth
                     @can('create', App\Models\Vacante::class)
                         <a href="{{ route('notificaciones') }}"
-                            class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center  text-white text-sm font-bold ">
+                           class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center  text-white text-sm font-bold ">
                             {{ Auth::user()->unreadNotifications->count() }}
                         </a>
                     @endcan
@@ -54,10 +60,10 @@
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
+                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
+                                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                             </button>
@@ -70,7 +76,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                                 onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Cerrar Sesión') }}
                                 </x-dropdown-link>
@@ -81,32 +87,32 @@
 
                 @guest
                     <!-- Navigation Links -->
-                        <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link :href="route('login')">
-                                <x-primary-button class="px-6 py-3">
-                                    {{ __('Iniciar sesión') }}
-                                </x-primary-button>
-                            </x-nav-link>
-                            <x-nav-link :href="route('register')">
-                                <x-secondary-button>
-                                    {{ __('Crear cuenta') }}
-                                </x-secondary-button>
-                            </x-nav-link>
-                        </div>
+                    <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('login')">
+                            <x-primary-button class="px-6 py-3">
+                                {{ __('Iniciar sesión') }}
+                            </x-primary-button>
+                        </x-nav-link>
+                        <x-nav-link :href="route('register')">
+                            <x-secondary-button>
+                                {{ __('Crear cuenta') }}
+                            </x-secondary-button>
+                        </x-nav-link>
+                    </div>
 
-                    @endguest
+                @endguest
             </div>
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16"/>
                         <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
@@ -117,29 +123,47 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         @auth
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
-                    {{ __('Mis vacantes') }}
-                </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
-                    {{ __('Crear Vacante') }}
-                </x-responsive-nav-link>
+                @can('create', App\Models\Vacante::class)
 
-                @if (auth()->user()->rol !== 1)
+                    <x-responsive-nav-link :href="route('vacantes.index')"
+                                           :active="request()->routeIs('vacantes.index')">
+                        {{ __('Mis vacantes') }}
+                    </x-responsive-nav-link>
 
-                <a href="{{ route('notificaciones') }}">
-                    <div class="flex items-center p-4 gap-2">
-                        <p class="text-base font-medium text-gray-600">
-                            @choice('Notificación|Notificaciones', Auth::user()->unreadNotifications->count())
-                        </p>
+                    <x-responsive-nav-link :href="route('vacantes.create')"
+                                           :active="request()->routeIs('vacantes.create')">
+                        {{ __('Crear Vacante') }}
+                    </x-responsive-nav-link>
 
-                        <a href="{{ route('notificaciones') }}"
-                            class="w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center  text-white text-sm font-bold ">
-                            {{ Auth::user()->unreadNotifications->count() }}
-                        </a>
-                    </div>
-                </a>
+                    <a href="{{ route('notificaciones') }}">
+                        <div class="flex items-center p-4 gap-2">
+                            <p class="text-base font-medium text-gray-600">
+                                @choice('Notificación|Notificaciones', Auth::user()->unreadNotifications->count())
+                            </p>
+
+                            <a href="{{ route('notificaciones') }}"
+                               class="w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center  text-white text-sm font-bold ">
+                                {{ Auth::user()->unreadNotifications->count() }}
+                            </a>
+                        </div>
+                    </a>
+                @endcan
+
+                @if(auth()->user()->rol_id === UserRoles::ADMINISTRADOR)
+                    <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                        {{ __('Gestionar cuentas') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('transaccion.index')" :active="request()->routeIs('transaccion.index')">
+                        {{ __('Gestionar pagos') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('plan.index')" :active="request()->routeIs('plan.index')">
+                        {{ __('Planes') }}
+                    </x-responsive-nav-link>
                 @endif
+
             </div>
 
             <!-- Responsive Settings Options -->
@@ -150,16 +174,12 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
-                    </x-responsive-nav-link>
-
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                                               onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('Cerrar Sesión') }}
                         </x-responsive-nav-link>

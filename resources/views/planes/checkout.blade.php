@@ -5,7 +5,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Confirmar Plan: <span
                     class="text-yellow-600">{{ $plan->nombre }}</span></h2>
             <p class="text-gray-600 mt-2">Precio: <span
-                    class="font-semibold">${{ number_format($plan->precio, 2) }}</span>
+                    class="font-semibold">{{ number_format($plan->precio, 2) }} L</span>
             </p>
             <p class="text-gray-600">Créditos: <span class="font-semibold">{{ $plan->creditos }} vacantes</span></p>
         </div>
@@ -21,7 +21,7 @@
                 <input type="text" name="referencia" id="referencia"
                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
                        placeholder="Ej: 12345678"
-                          value="{{ old('referencia') }}"
+                       value="{{ old('referencia') }}"
                 >
 
 
@@ -29,6 +29,7 @@
             </div>
 
             <!-- Input Comprobante -->
+
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="comprobante">
                     Subir Comprobante *
@@ -52,10 +53,11 @@
                     ← Volver a planes
                 </a>
 
-                <x-primary-button class="font-bold">
-                    {{ __('Enviar Comprobante') }}
-                </x-primary-button>
-
+                @can('enviar', $plan)
+                    <x-primary-button class="font-bold">
+                        {{ __('Enviar Comprobante') }}
+                    </x-primary-button>
+                @endcan
             </div>
         </form>
     </div>
